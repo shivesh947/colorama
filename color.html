@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="colors.js"></script>
+</head>
+<Style>
+	::selection {
+		background-color: transparent;
+	}
+	*{
+		outline: none;
+	}
+	body{
+		margin:0;
+	}
+	.tables{
+		height: 100%;
+		width: 100%;
+		background-color: tomato;
+		padding: 10px;
+
+	}
+	.cols{
+		height: 10vw;
+		width: 9.6vw;
+		display: inline-flex;
+		border: transparent;
+		box-shadow: 2px 2px  2px black;
+		font-size: 1.5vw;
+		/*margin-top:5px;*/
+	}
+	.cols:hover
+	{
+		box-shadow: 5px 5px  5px black;
+		border:2px solid black;
+		cursor: pointer;
+	}
+	@media (max-width: 1000px)
+	{
+		.cols{
+		height: 10vw;
+		width: 9.7vw;
+		}
+	}
+	#head{
+		height: 50px;
+		width: 100%;
+		background-color: darkblue;
+		font-size: 35px;
+   		 color: wheat;
+	}
+	a{
+		background-color: #4A235A;
+		color: wheat;
+		text-decoration: none;
+	}
+</Style>
+<script>
+
+
+function myFunction(eve) {
+  var copyText = document.getElementById(""+eve.id);
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  alert("Copied the text: " + copyText.value);
+}
+
+</script>
+<body>
+	<div id="head">
+		<a href="gradient.html">CSS COLOR MIXER</a>
+	</div>
+	<div class="tables" id="indata">
+	
+
+	</div>
+	<script>
+function loaddata(){
+	var x='';
+	var id=20;
+	 /* for(var i=0;i<20;i++)
+	  {
+	  	 var v=cols[i];
+		 x=x+'<a href="#'+id+'"><input type="input" readonly class="cols" name="" style="background-color:'+v+'; border:2px solid black;height: 10vw;width: 9.31vw;"></a>'
+		 id=id+10;
+	  }*/
+		for(var i=20;i<cols.length;i++)
+		{
+		var v=cols[i];
+		 x=x+'<input type="input" id='+i+' readonly class="cols" onclick="myFunction(this)" name="" value="'+v+'" style="background-color:'+v+';">'
+		}
+	document.getElementById('indata').innerHTML=''+x;
+}
+loaddata();
+	</script>
+</body>
+</html>

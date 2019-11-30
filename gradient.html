@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="colors.js"></script>
+</head>
+<Style>
+	::selection {
+		background-color: transparent;
+	}
+	*{
+		outline: none;
+	}
+	body{
+		margin:0;
+		border: 10px solid black;
+		width: 100%;
+
+	}
+	.tables{
+		height: 100%;
+		width: 100%;
+		}
+	.cols{
+		width: 1vw;
+		display: inline-flex;
+		border: 1px solid black;
+		color: transparent;
+		cursor: pointer;
+		/*margin-top:5px;*/
+	}
+	.cols:hover
+	{
+		cursor: pointer;
+	}
+	#grdientshow{
+		height: 400px;
+		width: 400px;
+		border-radius: 200px;
+		background-color: lightblue;
+	}
+	#heads{
+		height: 50px;
+		width: 100%;
+		background-color: darkblue;
+		font-size: 46px;
+   		 color: wheat;
+	}
+	#rot{
+		width: 75%;
+	}
+	#mid{
+		padding: 10px;
+	}
+	#typegrades{
+		margin-left: 2%;
+		width: 20%;
+		font-size: 20px;
+	}
+	#grd{
+		
+		border:transparent;
+		background-color: transparent;
+		color: transparent;
+		height: 0.1px;
+		width: 0.1px;
+	}
+	#divtype{
+		width: 40%;
+		height: 30px;
+	}
+	#gocolor{
+		font-size: 20px;
+		background-color: #4A235A;
+		color: wheat;
+		text-decoration: none;
+	}
+</Style>
+<script>
+
+let cols1="#00000000";
+let cols2="#00000000";
+let rota="45deg,";
+let type="linear-gradient(";
+let dtavalues='background-color: lightblue';
+
+function color1(eve) {
+  var copyText = document.getElementById(""+eve.id);
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  cols1=copyText.value;
+  var gry=copyText.value;
+  dtavalues=type+rota+gry+","+cols2+")";
+  document.getElementById("grdientshow").style.backgroundImage=dtavalues;
+}
+function color2(eve) {
+  var copyText = document.getElementById(""+eve.id);
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  cols2=copyText.value;
+  var gry=copyText.value;
+  dtavalues=type+rota+cols1+","+gry+")";
+  document.getElementById("grdientshow").style.backgroundImage=dtavalues;
+}
+
+function gradrotate(){
+  rota=document.getElementById("rot").value;
+  rota=rota+'deg,';
+  dtavalues=type+rota+cols1+","+cols2+")";
+  document.getElementById("grdientshow").style.backgroundImage=dtavalues;
+}
+function gradtype(){
+  type=document.getElementById("typegrades").value;
+  if(type=="radial-gradient(")
+  {
+  // console.log(type+rota+","+cols1+","+cols2+")");
+  dtavalues=type+cols1+","+cols2+")";
+  document.getElementById("grdientshow").style.backgroundImage=dtavalues;
+  rota="";
+  }
+  else
+  {
+  	rota="45deg,";
+  	// console.log(type+rota+cols1+","+cols2+")");
+  	dtavalues=type+rota+cols1+","+cols2+")";
+  	document.getElementById("grdientshow").style.backgroundImage=dtavalues;
+  }
+}
+
+
+function copyfun() {
+  document.getElementById("grd").value=dtavalues;
+ 
+   var copyText = document.getElementById("grd");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  // console.log(copyText);
+  alert("Copy text "+copyText.value);
+}
+</script>
+
+<script>
+	function changetype()
+	{
+		var chg=document.getElementById("grdientshow").style;
+		if(chg.borderRadius!="0px")
+		{
+			chg.borderRadius="0px";
+			chg.height="380px";
+			chg.width="100%";
+		}
+		else
+		{
+			chg.borderRadius="200px";
+			chg.height="400px";
+			chg.width="400px";
+		}
+
+	}
+</script>
+<body>
+	<div id="heads">
+		<center>
+		<a href="color.html" id="gocolor">CSS COLORS</a>
+			CSS COLOR MIXER
+		</center>
+	</div>
+	<div id="mid">
+	<select id="typegrades" onchange="gradtype()">
+  		<option value="linear-gradient(">linear-gradient</option>
+  		<option value="radial-gradient(">radial-gradient</option>
+	</select>
+	<input type="button" name="" id="divtype" value="Type" onclick="changetype()">
+
+    </div>
+	<input type="range" name="" id="rot" onchange="gradrotate()">
+	
+	<div class="tables" id="indata">
+	
+
+	</div>
+	<center><div id="grdientshow" onclick="copyfun()">
+		<input type="text" name="" id="grd">	
+	</div></center><br>
+	<div class="tables" id="indata2">
+	
+
+	</div>
+	<div id="heads">
+		
+	</div>
+</body>
+	<script>
+function loaddata(){
+	var x='';
+	var id=20;
+		for(var i=20;i<cols.length;i++)
+		{
+		var v=cols[i];
+		 x=x+'<input type="input" id='+i+' readonly class="cols" onclick="color1(this)" value='+v+' style="background-color:'+v+';">'
+		}
+
+	document.getElementById('indata').innerHTML=''+x;
+}
+loaddata();
+function loaddata2(){
+	var x='';
+	var id=20;
+		for(var i=20;i<cols.length;i++)
+		{
+		var v=cols[i];
+		 x=x+'<input type="input" id=c'+i+' readonly class="cols" onclick="color2(this)" value='+v+' style="background-color:'+v+';">'
+		}
+
+	document.getElementById('indata2').innerHTML=''+x;
+}
+loaddata2();
+	</script>
+</html>
