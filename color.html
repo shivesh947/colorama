@@ -55,6 +55,16 @@
 		color: wheat;
 		text-decoration: none;
 	}
+	.blinking{
+    animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: #000;    }
+    49%{    color: #000; }
+    60%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #000;    }
+}
 </Style>
 <script>
 
@@ -70,7 +80,7 @@ function myFunction(eve) {
 </script>
 <body>
 	<div id="head">
-		<a href="gradient.html">CSS COLOR MIXER</a>
+		<a href="gradient.html" class="blinking">CSS COLOR MIXER</a>
 	</div>
 	<div class="tables" id="indata">
 	
